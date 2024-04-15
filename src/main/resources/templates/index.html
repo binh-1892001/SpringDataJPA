@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/add">addUser</a>
+<table border="1" cellpadding="10" cellspacing="10">
+    <thead>
+    <tr>
+        <th>STT</th>
+        <th>FullName</th>
+        <th>UserName</th>
+        <th>DateOfBirth</th>
+        <th>Status</th>
+        <th colspan="2">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user,loop: ${users}">
+        <td th:text="${loop.count}"></td>
+        <td th:text="${user.fullName}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${#dates.format(user.getDateOfBirth(),'dd-MM-yyyy')}"></td>
+        <td th:text="${user.isActive}?'Hoạt động':'Không hoạt động'"></td>
+        <td>
+            <a href="">Edit</a>
+        </td>
+        <td>
+            <a href="">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
