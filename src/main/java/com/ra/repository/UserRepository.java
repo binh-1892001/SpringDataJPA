@@ -1,6 +1,8 @@
 package com.ra.repository;
 
 import com.ra.model.Users;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -18,4 +20,6 @@ public interface UserRepository extends JpaRepository<Users,String> {
 	 * */
 	@Query(value = "select u from Users u where u.fullName like concat('%',:keyword,'%')")
 	List<Users> searchUsersByNameCustom(@Param("keyword") String keyword);
+	
+	Page<Users> findAll(Pageable pageable);
 }

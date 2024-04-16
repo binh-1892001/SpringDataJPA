@@ -4,7 +4,10 @@ import com.ra.model.Users;
 import com.ra.repository.UserRepository;
 import com.ra.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +19,8 @@ public class UserServiceImpl implements UserService {
 	private final UserRepository userRepository;
 	
 	@Override
-	public List<Users> findAll() {
-		return userRepository.findAll();
+	public Page<Users> findAll(Pageable pageable) {
+		return userRepository.findAll(pageable);
 	}
 	
 	@Override

@@ -3,6 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .active {
+            display: inline;
+        }
+        .inActive {
+            display: none;
+        }
+        .flex {
+            display: flex;
+        }
+        .gap-5 {
+            gap: 5px;
+        }
+    </style>
 </head>
 <body>
 <a href="/add">addUser</a>
@@ -18,8 +32,8 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="user,loop: ${users}">
-        <td th:text="${loop.count}"></td>
+    <tr th:each="user,loop: ${users.content}">
+        <td th:text="${(users.number*users.pageable.pageSize) + loop.count}"></td>
         <td th:text="${user.fullName}"></td>
         <td th:text="${user.username}"></td>
         <td th:text="${#dates.format(user.getDateOfBirth(),'dd-MM-yyyy')}"></td>
@@ -33,5 +47,17 @@
     </tr>
     </tbody>
 </table>
+<!-- phân trang -->
+<!--<p>-->
+<!--    <a th:href="@{'?page='+${users.pageable.pageNumber - 1}}" th:class="${users.pageable.pageNumber}!=0?'active':'inActive'">Pre</a>-->
+<!--    <span th:text="${users.pageable.pageNumber}+1"></span> / <span th:text="${totalPages}"></span>-->
+<!--    <a th:href="@{'?page='+${users.pageable.pageNumber+1}}" th:class="${users.pageable.pageNumber+1}!=${totalPages}?'active':'inActive'">Next</a>-->
+<!--</p>-->
+<div class="flex gap-5">
+    <p th:each="i:${#numbers.sequence(1,totalPages)}">
+        <a th:href="@{'?page='+${i - 1}}"><button th:text="${i}"></button></a>
+    </p>
+</div>
+
 </body>
 </html>
